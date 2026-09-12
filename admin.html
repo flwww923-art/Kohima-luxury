@@ -28,7 +28,7 @@
             <form id="add-product-form" onsubmit="addProduct(event)">
                 <input type="text" id="p-name" placeholder="اسم المنتج (مثلاً: Sneaker Casual)" required>
                 <input type="number" id="p-price" placeholder="السعر (DA)" required>
-                <input type="text" id="p-image" placeholder="رابط الصورة (Image URL)" required>
+                <input type="file" id="p-image-file" accept="image/*" required>
                 <input type="text" id="p-sizes" placeholder="المقاسات (مثلاً: 40, 41, 42)" required>
                 <button type="submit" class="save-btn">حفظ وإضافة المنتج</button>
             </form>
