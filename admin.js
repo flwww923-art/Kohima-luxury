@@ -3,7 +3,7 @@ const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 
 const _supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-// جلب وعرض المنتجات في جدول المشرف فوراً
+// جلب وعرض المنتجات في جدول المشرف
 async function fetchAdminProducts() {
     const tbody = document.getElementById('admin-products-list');
     if (!tbody) return;
@@ -59,17 +59,19 @@ async function deleteProduct(id) {
     }
 }
 
-// إضافة منتج جديد
+// معالجة نموذج إضافة منتج جديد
 document.addEventListener('DOMContentLoaded', () => {
     fetchAdminProducts();
 
     const form = document.getElementById('add-product-form');
     if (form) {
         form.addEventListener('submit', async (e) => {
-            e.preventDefault();
+            e.preventDefault(); // منع إعادة تحميل الصفحة الذي يسبب المشكلة
             const submitBtn = document.getElementById('submit-btn');
-            submitBtn.innerText = 'جاري الإضافة...';
-            submitBtn.disabled = true;
+            if (submitBtn) {
+                submitBtn.innerText = 'جاري الإضافة...';
+                submitBtn.disabled = true;
+            }
 
             const name = document.getElementById('product-name').value;
             const price = parseFloat(document.getElementById('product-price').value);
@@ -101,17 +103,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 alert('تمت إضافة المنتج بنجاح!');
                 form.reset();
-                fetchAdminProducts();
+                fetchAdminProducts(); // تحديث الجدول فوراً لعرض المنتج الجديد
             } catch (err) {
                 console.error('Error:', err);
                 alert('حدث خطأ: ' + err.message);
             } finally {
-                submitBtn.innerText = 'إضافة المنتج';
-                submitBtn.disabled = false;
+                if (submitBtn) {
+                    submitBtn.innerText = 'إضافة المنتج';
+                    submitBtn.disabled = false;
+                }
             }
         });
     }
 });
-
-// استدعاء الجلب مباشرة عند تحميل الملف
-fetchAdminProducts();
