@@ -20,23 +20,19 @@
         .delete-btn:hover { background: #cc0000; }
         #admin-content { display: none; }
     </style>
-    <!-- استدعاء مكتبة Supabase -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 
     <div class="container">
-        <!-- شاشة تسجيل الدخول -->
         <div id="login-section" style="text-align: center; padding: 40px 20px;">
             <h2>تسجيل دخول المشرف</h2>
             <p style="color: #666; margin-bottom: 20px;">الرجاء إدخال كلمة المرور للوصول إلى لوحة التحكم</p>
-            <!-- خانة كلمة مرور مخفية تماماً بدون إظهار أي نص مسبق -->
             <input type="password" id="admin-password" placeholder="أدخل كلمة المرور سرية" style="max-width: 300px; padding: 10px; margin: 0 auto 15px auto; text-align: center; font-size: 16px; border: 1px solid #ddd; border-radius: 4px; display: block;">
             <br>
             <button onclick="checkPassword()">دخول</button>
         </div>
 
-        <!-- محتوى لوحة التحكم -->
         <div id="admin-content">
             <h2>لوحة تحكم المشرف - إضافة منتج جديد</h2>
             <form id="add-product-form">
@@ -77,17 +73,25 @@
         </div>
     </div>
 
+    <script src="admin.js"></script>
+
     <script>
+        // التحقق مما إذا كان المشرف قد سجل دخوله مسبقاً عبر التخزين المحلي
+        window.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem("isAdminLoggedIn") === "true") {
+                document.getElementById('login-section').style.display = 'none';
+                document.getElementById('admin-content').style.display = 'block';
+            }
+        });
+
         function checkPassword() {
             const passInput = document.getElementById('admin-password').value;
             if (passInput === 'kouim.16') {
+                // حفظ حالة الدخول لكي لا يطلبها مرة أخرى
+                localStorage.setItem("isAdminLoggedIn", "true");
+                
                 document.getElementById('login-section').style.display = 'none';
                 document.getElementById('admin-content').style.display = 'block';
-                
-                // تحميل ملف admin.js وتشغيله فوراً
-                const scriptTag = document.createElement('script');
-                scriptTag.src = 'admin.js?v=' + Date.now();
-                document.body.appendChild(scriptTag);
             } else {
                 alert('كلمة المرور غير صحيحة!');
             }
