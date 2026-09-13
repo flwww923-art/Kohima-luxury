@@ -10,7 +10,7 @@
         h2 { border-bottom: 2px solid #eee; padding-bottom: 10px; margin-bottom: 20px; }
         .form-group { margin-bottom: 15px; }
         label { display: block; margin-bottom: 5px; font-weight: bold; }
-        input[type="text"], input[type="number"], input[type="file"] { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
+        input[type="text"], input[type="number"], input[type="password"], input[type="file"] { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
         button { background: #000; color: #fff; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; font-weight: bold; }
         button:hover { background: #333; }
         table { width: 100%; border-collapse: collapse; margin-top: 30px; }
@@ -20,7 +20,7 @@
         .delete-btn:hover { background: #cc0000; }
         #admin-content { display: none; }
     </style>
-    <!-- استدعاء مكتبة Supabase مباشرة في الهيد لضمان جاهزيتها -->
+    <!-- استدعاء مكتبة Supabase -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
@@ -30,7 +30,8 @@
         <div id="login-section" style="text-align: center; padding: 40px 20px;">
             <h2>تسجيل دخول المشرف</h2>
             <p style="color: #666; margin-bottom: 20px;">الرجاء إدخال كلمة المرور للوصول إلى لوحة التحكم</p>
-            <input type="password" id="admin-password" placeholder="أدخل كلمة المرور (kouim.16)" style="max-width: 300px; padding: 10px; margin: 0 auto 15px auto; text-align: center; font-size: 16px; border: 1px solid #ddd; border-radius: 4px; display: block;">
+            <!-- خانة كلمة مرور مخفية تماماً بدون إظهار أي نص مسبق -->
+            <input type="password" id="admin-password" placeholder="أدخل كلمة المرور سرية" style="max-width: 300px; padding: 10px; margin: 0 auto 15px auto; text-align: center; font-size: 16px; border: 1px solid #ddd; border-radius: 4px; display: block;">
             <br>
             <button onclick="checkPassword()">دخول</button>
         </div>
@@ -85,10 +86,10 @@
                 
                 // تحميل ملف admin.js وتشغيله فوراً
                 const scriptTag = document.createElement('script');
-                scriptTag.src = 'admin.js?v=' + Date.now(); // لضمان عدم تحميل نسخة قديمة مخزنة
+                scriptTag.src = 'admin.js?v=' + Date.now();
                 document.body.appendChild(scriptTag);
             } else {
-                alert('كلمة المرور غير صحيحة! كلمة المرور هي: kouim.16');
+                alert('كلمة المرور غير صحيحة!');
             }
         }
     </script>
