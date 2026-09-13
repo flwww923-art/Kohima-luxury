@@ -18,22 +18,24 @@
         th { background: #000; color: #fff; }
         .delete-btn { background: #ff4d4d; color: #fff; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; }
         .delete-btn:hover { background: #cc0000; }
-        #admin-content { display: none; } /* إخفاء اللوحة حتى يتم إدخال كلمة المرور الصحيحة */
+        #admin-content { display: none; }
     </style>
+    <!-- استدعاء مكتبة Supabase مباشرة في الهيد لضمان جاهزيتها -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 
     <div class="container">
-        <!-- شاشة التحقق من كلمة المرور -->
+        <!-- شاشة تسجيل الدخول -->
         <div id="login-section" style="text-align: center; padding: 40px 20px;">
             <h2>تسجيل دخول المشرف</h2>
             <p style="color: #666; margin-bottom: 20px;">الرجاء إدخال كلمة المرور للوصول إلى لوحة التحكم</p>
-            <input type="password" id="admin-password" placeholder="أدخل كلمة المرور" style="max-width: 300px; margin: 0 auto 15px auto; text-align: center; font-size: 16px;">
+            <input type="password" id="admin-password" placeholder="أدخل كلمة المرور (kouim.16)" style="max-width: 300px; padding: 10px; margin: 0 auto 15px auto; text-align: center; font-size: 16px; border: 1px solid #ddd; border-radius: 4px; display: block;">
             <br>
             <button onclick="checkPassword()">دخول</button>
         </div>
 
-        <!-- محتوى لوحة التحكم (لا يظهر إلا بعد كلمة المرور الصحيحة) -->
+        <!-- محتوى لوحة التحكم -->
         <div id="admin-content">
             <h2>لوحة تحكم المشرف - إضافة منتج جديد</h2>
             <form id="add-product-form">
@@ -68,25 +70,25 @@
                     </tr>
                 </thead>
                 <tbody id="admin-products-list">
-                    <!-- سيتم جلب وعرض جميع المنتجات هنا تلقائياً مع زر الحذف -->
+                    <tr><td colspan="5" style="text-align:center; color:#777;">جاري تحميل المنتجات...</td></tr>
                 </tbody>
             </table>
         </div>
     </div>
 
-    <!-- كود التحقق من كلمة المرور وتشغيل لوحة التحكم -->
     <script>
         function checkPassword() {
             const passInput = document.getElementById('admin-password').value;
             if (passInput === 'kouim.16') {
                 document.getElementById('login-section').style.display = 'none';
                 document.getElementById('admin-content').style.display = 'block';
-                // تفعيل ملف الجافاسكريبت بعد نجاح كلمة المرور
+                
+                // تحميل ملف admin.js وتشغيله فوراً
                 const scriptTag = document.createElement('script');
-                scriptTag.src = 'admin.js';
+                scriptTag.src = 'admin.js?v=' + Date.now(); // لضمان عدم تحميل نسخة قديمة مخزنة
                 document.body.appendChild(scriptTag);
             } else {
-                alert('كلمة المرور غير صحيحة! حاول مرة أخرى.');
+                alert('كلمة المرور غير صحيحة! كلمة المرور هي: kouim.16');
             }
         }
     </script>
