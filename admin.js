@@ -1,6 +1,6 @@
 // إعداد الاتصال بـ Supabase
 const SUPABASE_URL = 'https://ogsvoxbgxjezirjwiemb.supabase.co';
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9nc3ZveGJneGplemlyandpZW1iIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjI2MjM2MzEsImV4cCI6MjAzODE5OTYzMX0.eyJzaWduYXR1cmUiOiJmYWtlX3BsYWNlaG9sZGVyX2Zvcl95b3VyX2tleSJ9'; // تم لصق المفتاح الصحيح هنا
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9nc3ZveGJneGplemlyandpZW1iIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkyMjkyNjMsImV4cCI6MjEwNDgwNTI2M30.vxMmDln8Kp9cLE4_tsfAhRaOMEQIU97e5X4z--IxoS8'; 
 
 // تهيئة عميل Supabase
 const { createClient } = supabase;
