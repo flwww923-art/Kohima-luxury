@@ -1,25 +1,20 @@
-// تحميل مكتبة Supabase تلقائياً
-function loadSupabaseScript() {
-    return new Promise((resolve, reject) => {
-        if (window.supabase) {
-            resolve(window.supabase);
-            return;
-        }
-        const script = document.createElement('script');
-        script.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
-        script.onload = () => resolve(window.supabase);
-        script.onerror = () => reject(new Error('فشل تحميل مكتبة Supabase'));
-        document.head.appendChild(script);
-    });
-}
-
 let _supabase;
 
 async function initSupabase() {
-    const supabaseLib = await loadSupabaseScript();
+    if (!window.supabase) {
+        await new Promise((resolve, reject) => {
+            const s = document.createElement('script');
+            s.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
+            s.onload = resolve;
+            s.onerror = reject;
+            document.head.appendChild(s);
+        });
+    }
+
     const SUPABASE_URL = 'https://ogsvoxbgxjezirjwiemb.supabase.co';
     const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9nc3ZveGJneGplemlyandpZW1iIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkyMjkyNjMsImV4cCI6MjEwNDgwNTI2M30.vxMmDln8Kp9cLE4_tsfAhRaOMEQIU97e5X4z--IxoS8';
-    _supabase = supabaseLib.createClient(SUPABASE_URL, SUPABASE_KEY);
+    
+    _supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
     fetchAdminProducts();
 }
 
@@ -43,27 +38,25 @@ async function fetchAdminProducts() {
         }
 
         products.forEach(product => {
-            tbody.innerHTML += `
-                <tr>
-                    <td><img src="${product.image_url || ''}" width="50" height="50" style="object-fit:cover; border-radius:4px;"></td>
-                    <td>${product.name}</td>
-                    <td>${product.price} DA</td>
-                    <td>${product.size || '-'}</td>
-                    <td><button class="delete-btn" onclick="deleteProduct('${product.id}', '${product.image_url}')">حذف</button></td>
-                </tr>
-            `;
+            tbody.innerHTML += 
+                '<tr>' +
+                    '<td><img src="' + (product.image_url || '') + '" width="50" height="50" style="object-fit:cover; border-radius:4px;"></td>' +
+                    '<td>' + product.name + '</td>' +
+                    '<td>' + product.price + ' DA</td>' +
+                    '<td>' + (product.size || '-') + '</td>' +
+                    '<td><button class="delete-btn" onclick="deleteProduct(\'' + product.id + '\')">حذف</button></td>' +
+                '</tr>';
         });
     } catch (err) {
         console.error('Error fetching admin products:', err);
     }
 }
 
-// دالة حذف المنتج من قاعدة البيانات وتخزين الصور
-async function deleteProduct(id, imageUrl) {
+// دالة حذف المنتج من قاعدة البيانات
+async function deleteProduct(id) {
     if (!confirm('هل أنت متأكد من رغبتك في حذف هذا المنتج؟')) return;
 
     try {
-        // حذف المنتج من جدول products
         const { error } = await _supabase
             .from('products')
             .delete()
@@ -72,14 +65,14 @@ async function deleteProduct(id, imageUrl) {
         if (error) throw error;
 
         alert('تم حذف المنتج بنجاح!');
-        fetchAdminProducts(); // إعادة تحميل القائمة
+        fetchAdminProducts();
     } catch (err) {
         console.error('Error deleting product:', err);
         alert('حدث خطأ أثناء الحذف: ' + err.message);
     }
 }
 
-// إضافة منتج جديد
+// إضافة منتج جديد ورفع الصورة للتخزين (Storage)
 document.addEventListener('DOMContentLoaded', () => {
     initSupabase();
 
@@ -99,8 +92,8 @@ document.addEventListener('DOMContentLoaded', () => {
             try {
                 let imageUrl = '';
                 if (imageFile) {
-                    const fileName = `${Date.now()}-${imageFile.name}`;
-                    const { data: uploadData, error: uploadError } = await _supabase.storage
+                    const fileName = Date.now() + '-' + imageFile.name;
+                    const { error: uploadError } = await _supabase.storage
                         .from('products-images')
                         .upload(fileName, imageFile);
 
