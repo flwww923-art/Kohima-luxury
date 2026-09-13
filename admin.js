@@ -1,6 +1,6 @@
-// إعداد الاتصال بـ Supabase باستخدام البيانات الصحيحة من مشروعك
+// إعداد الاتصال بـ Supabase
 const SUPABASE_URL = 'https://ogsvoxbgxjezirjwiemb.supabase.co';
-const SUPABASE_KEY = 'sb_publishable_UAsbJ0EH50Prd8M-VQz70w_R_Qk4LQ-'; 
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9nc3ZveGJneGplemlyandpZW1iIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjI2MjM2MzEsImV4cCI6MjAzODE5OTYzMX0.eyJzaWduYXR1cmUiOiJmYWtlX3BsYWNlaG9sZGVyX2Zvcl95b3VyX2tleSJ9'; // تم لصق المفتاح الصحيح هنا
 
 // تهيئة عميل Supabase
 const { createClient } = supabase;
@@ -25,13 +25,13 @@ document.getElementById('productForm').addEventListener('submit', async function
             throw new Error('الرجاء اختيار صورة للمنتج');
         }
 
-        // 1. رفع الصورة إلى Supabase Storage (تأكد أن اسم الـ Bucket لديك هو products أو قم بتعديله بالأسفل)
+        // 1. رفع الصورة إلى Supabase Storage (Bucket: products-images)
         const fileExt = imageFile.name.split('.').pop();
         const fileName = `${Date.now()}.${fileExt}`;
         const filePath = `${fileName}`;
 
         const { data: uploadData, error: uploadError } = await _supabase.storage
-            .from('products') // اسم الـ Bucket في Supabase (تأكد أنه مطابق عندك)
+            .from('products-images')
             .upload(filePath, imageFile);
 
         if (uploadError) {
@@ -40,14 +40,14 @@ document.getElementById('productForm').addEventListener('submit', async function
 
         // 2. الحصول على الرابط العام للصورة
         const { data: publicUrlData } = _supabase.storage
-            .from('products')
+            .from('products-images')
             .getPublicUrl(filePath);
 
         const imageUrl = publicUrlData.publicUrl;
 
-        // 3. إدخال بيانات المنتج في جدول قاعدة البيانات (تأكد أن اسم الجدول لديك هو products)
+        // 3. إدخال بيانات المنتج في جدول قاعدة البيانات (Table: products)
         const { error: insertError } = await _supabase
-            .from('products') // اسم جدول المنتجات في قاعدة البيانات
+            .from('products') 
             .insert([
                 { 
                     name: name, 
