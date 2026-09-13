@@ -3,7 +3,7 @@
 // =====================================================
 
 const SUPABASE_URL = 'https://ogsvoxbgxjezirjwiemb.supabase.co';
-const SUPABASE_ANON_KEY = sb_publishable_UAsbJ0EH5OPrd8M-VQz7Ow_R_QK4L
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9nc3ZveGJneGplemlyandpZW1iIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkyMjkyNjMsImV4cCI6MjEwNDgwNTI2M30.vxMmDln8Kp9cLE4_tsfAhRaOMEQIU97e5X4z--IxoS8';
 
 // تهيئة عميل Supabase
 const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -20,6 +20,7 @@ async function loadProducts() {
 
     if (error) {
         console.error('خطأ في جلب المنتجات:', error);
+        container.innerHTML = '<p style="text-align:center; grid-column: 1/-1; color:red;">خطأ في الاتصال بقاعدة البيانات.</p>';
         return;
     }
 
