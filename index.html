@@ -1,342 +1,110 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Kouim Luxury | Collection Basmats</title>
-
-    <meta 
-        name="description" 
-        content="Découvrez la collection Kouim Luxury. Des basmats élégantes, modernes et sélectionnées avec soin."
-    >
-
-    <link rel="stylesheet" href="style.css">
+    <title>Kouim Luxury | Boutique en Ligne</title>
+    <style>
+        /* تنسيقات أساسية للمتجر */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        header {
+            background: #fff;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            color: #000;
+        }
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #555;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        nav a:hover {
+            color: #000;
+        }
+        .cart-button {
+            background: #000;
+            color: #fff;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .cart-button b {
+            background: #fff;
+            color: #000;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 12px;
+        }
+        main {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+        h1.section-title {
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        /* شبكة المنتجات */
+        #products-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 20px;
+        }
+    </style>
 </head>
-
 <body>
 
-    <!-- ================= HEADER ================= -->
-
-    <header class="header">
-
-        <div class="logo">
-            <span>KOUIM</span>
-            <small>LUXURY</small>
-        </div>
-
-        <nav class="navbar">
-            <a href="#accueil">Accueil</a>
-            <a href="#collection">Collection</a>
-            <a href="#apropos">À propos</a>
-            <a href="#contact">Contact</a>
+    <!-- الهيدر وشريط التنقل -->
+    <header>
+        <div class="logo">KOUIM</div>
+        <nav>
+            <a href="#">Accueil</a>
+            <a href="#">Collection</a>
+            <a href="#">À propos</a>
+            <a href="#">Contact</a>
         </nav>
-
         <button class="cart-button">
             🛒 <span>Panier</span>
             <b id="cart-count">0</b>
         </button>
-
     </header>
 
-
-    <!-- ================= HERO ================= -->
-
+    <!-- المحتوى الرئيسي وعرض المنتجات -->
     <main>
-
-        <section id="accueil" class="hero">
-
-            <div class="hero-content">
-
-                <p class="welcome">BIENVENUE CHEZ KOUIM LUXURY</p>
-
-                <h1>
-                    L'élégance commence
-                    <span>par les détails.</span>
-                </h1>
-
-                <p class="hero-text">
-                    Découvrez notre sélection de basmats,
-                    choisies avec soin pour vous offrir
-                    élégance, confort et qualité.
-                </p>
-
-                <div class="hero-buttons">
-                    <a href="#collection" class="primary-button">
-                        Découvrir la collection
-                    </a>
-
-                    <a href="#contact" class="secondary-button">
-                        Nous contacter
-                    </a>
-                </div>
-
-            </div>
-
-            <div class="hero-image">
-                <!-- Image principale du magasin / produit -->
-                <img src="images/hero.jpg" alt="Collection Kouim Luxury">
-            </div>
-
-        </section>
-
-
-        <!-- ================= WELCOME ================= -->
-
-        <section class="welcome-section">
-
-            <p class="section-label">KOUIM LUXURY</p>
-
-            <h2>
-                Bien plus qu'un produit,
-                <br>
-                <span>une véritable expérience.</span>
-            </h2>
-
-            <p>
-                Nous sélectionnons nos produits avec attention
-                afin de vous proposer des articles qui correspondent
-                à votre style et à vos envies.
-            </p>
-
-        </section>
-
-
-        <!-- ================= COLLECTION ================= -->
-
-        <section id="collection" class="products-section">
-
-            <div class="section-header">
-
-                <div>
-                    <p class="section-label">NOTRE COLLECTION</p>
-
-                    <h2>
-                        Découvrez nos <span>basmats</span>
-                    </h2>
-                </div>
-
-                <p>
-                    Explorez notre collection et trouvez
-                    le modèle qui vous correspond.
-                </p>
-
-            </div>
-
-
-            <!-- Les produits seront ajoutés ici -->
-
-            <div id="products-container" class="products-grid">
-
-                <!-- Produit exemple -->
-
-                <article class="product-card">
-
-                    <div class="product-image">
-                        <img 
-                            src="images/product-1.jpg" 
-                            alt="Basmat Kouim Luxury"
-                        >
-                    </div>
-
-                    <div class="product-info">
-
-                        <p class="product-category">
-                            KOUIМ LUXURY
-                        </p>
-
-                        <h3>Basmat Élégance</h3>
-
-                        <p class="product-price">
-                            3 500 DA
-                        </p>
-
-                        <button 
-                            class="add-cart"
-                            onclick="addToCart()"
-                        >
-                            Ajouter au panier
-                        </button>
-
-                    </div>
-
-                </article>
-
-            </div>
-
-        </section>
-
-
-        <!-- ================= WHY US ================= -->
-
-        <section class="advantages">
-
-            <div class="advantage">
-                <span>✦</span>
-                <h3>Qualité</h3>
-                <p>
-                    Des produits sélectionnés
-                    avec attention.
-                </p>
-            </div>
-
-            <div class="advantage">
-                <span>✦</span>
-                <h3>Élégance</h3>
-                <p>
-                    Des modèles adaptés
-                    à votre style.
-                </p>
-            </div>
-
-            <div class="advantage">
-                <span>✦</span>
-                <h3>Service</h3>
-                <p>
-                    Nous sommes à votre écoute
-                    pour chaque commande.
-                </p>
-            </div>
-
-            <div class="advantage">
-                <span>✦</span>
-                <h3>Confiance</h3>
-                <p>
-                    Votre satisfaction
-                    est notre priorité.
-                </p>
-            </div>
-
-        </section>
-
-
-        <!-- ================= ABOUT ================= -->
-
-        <section id="apropos" class="about-section">
-
-            <div class="about-image">
-                <img 
-                    src="images/about.jpg" 
-                    alt="Kouim Luxury"
-                >
-            </div>
-
-            <div class="about-content">
-
-                <p class="section-label">NOTRE HISTOIRE</p>
-
-                <h2>
-                    Bienvenue dans
-                    <span>Kouim Luxury</span>
-                </h2>
-
-                <p>
-                    Chez Kouim Luxury, nous croyons que
-                    chaque détail compte.
-                </p>
-
-                <p>
-                    Notre objectif est de vous proposer
-                    des produits élégants et de qualité,
-                    tout en vous offrant une expérience
-                    d'achat simple et agréable.
-                </p>
-
-                <a href="#contact" class="primary-button">
-                    En savoir plus
-                </a>
-
-            </div>
-
-        </section>
-
-
-        <!-- ================= ORDER ================= -->
-
-        <section class="order-section">
-
-            <div>
-
-                <p class="section-label">COMMANDER</p>
-
-                <h2>
-                    Votre prochaine pièce
-                    <span>vous attend.</span>
-                </h2>
-
-                <p>
-                    Choisissez votre produit,
-                    ajoutez-le au panier et passez
-                    votre commande en quelques clics.
-                </p>
-
-                <a href="#collection" class="primary-button">
-                    Voir les produits
-                </a>
-
-            </div>
-
-        </section>
-
-
-        <!-- ================= CONTACT ================= -->
-
-        <section id="contact" class="contact-section">
-
-            <p class="section-label">CONTACT</p>
-
-            <h2>
-                Une question ?
-                <span>Nous sommes là.</span>
-            </h2>
-
-            <p>
-                N'hésitez pas à nous contacter
-                pour toute information.
-            </p>
-
-            <div class="contact-info">
-
-                <a href="tel:0541429664">
-                    📞 0541 42 96 64
-                </a>
-
-                <p>
-                    📍 Bazar Chaoui, Bachidjerah
-                </p>
-
-            </div>
-
-        </section>
-
+        <h1 class="section-title">Notre Collection</h1>
+        <div id="products-container">
+            <!-- سيتم جلب المنتجات وأزرار المقاسات ديناميكياً هنا عبر script.js -->
+        </div>
     </main>
 
-
-    <!-- ================= FOOTER ================= -->
-
-    <footer class="footer">
-
-        <div class="logo">
-            <span>KOUIM</span>
-            <small>LUXURY</small>
-        </div>
-
-        <p>
-            ©️ 2026 Kouim Luxury. Tous droits réservés.
-        </p>
-
-        <div>
-            <a href="#accueil">Accueil</a>
-            <a href="#collection">Collection</a>
-            <a href="#contact">Contact</a>
-        </div>
-
-    </footer>
-
-
-    <!-- JavaScript -->
-
+    <!-- استدعاء ملف الجافا سكربت الخارجي -->
     <script src="script.js"></script>
-
 </body>
 </html>
