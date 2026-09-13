@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>لوحة التحكم - إضافة منتج</title>
     <link rel="stylesheet" href="admin.css">
-    <!-- استدعاء مكتبة Supabase الرسمية من CDN -->
+    <!-- استدعاء مكتبة Supabase -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 
-    <div class="admin-container">
+    <!-- حاوية لوحة التحكم (مخفية افتراضياً حتى يتم إدخال كلمة السر الصحيحة) -->
+    <div class="admin-container" id="adminPanel" style="display: none;">
         <h2>لوحة تحكم المشرف - إضافة منتج جديد</h2>
         
         <form id="productForm">
@@ -21,7 +22,7 @@
 
             <div class="form-group">
                 <label for="productSize">المقاسات المتاحة:</label>
-                <input type="text" id="productSize" placeholder="مثال: S, M, L, XL" required>
+                <input type="text" id="productSize" placeholder="مثال: 42, 43, 44" required>
             </div>
 
             <div class="form-group">
@@ -34,6 +35,22 @@
 
         <p id="message" style="margin-top: 15px; font-weight: bold;"></p>
     </div>
+
+    <!-- كود الحماية بكلمة السر الجديدة -->
+    <script>
+        // كلمة السر الخاصة بلوحة التحكم
+        const ADMIN_PASSWORD = "kouim3991"; 
+
+        // التحقق من كلمة السر عند فتح الصفحة
+        let passwordInput = prompt("الرجاء إدخال كلمة سر لوحة التحكم:");
+        if (passwordInput !== ADMIN_PASSWORD) {
+            alert("كلمة السر غير صحيحة! سيتم توجيهك للخارج.");
+            window.location.href = "index.html"; // توجيه للصفحة الرئيسية في حال الخطأ
+        } else {
+            // إذا كانت صحيحة، تظهر لوحة التحكم
+            document.getElementById('adminPanel').style.display = 'block';
+        }
+    </script>
 
     <script src="admin.js"></script>
 </body>
