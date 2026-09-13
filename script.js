@@ -37,11 +37,10 @@ async function loadProducts() {
         container.innerHTML = '';
 
         products.forEach(product => {
-            // إذا كان عمود المقاسات فارغاً في Supabase، نضع مقاسات افتراضية للأحذية
-            let availableSizes = ['37', '38', '39', '40', '41', '42'];
-            if (product.size) {
-                availableSizes = product.size.split(',').map(s => s.trim());
-            }
+            // هنا يقرأ المقاسات التي تكتبها أنت في قاعدة البيانات (سواء في حقل size أو sizes)
+            // مثلاً إذا كتبتها هكذا: 41, 42, 43
+            let rawSizes = product.size || product.sizes || '37, 38, 39, 40';
+            let availableSizes = rawSizes.toString().split(',').map(s => s.trim());
 
             let sizesHtml = '<div class="sizes-container" style="display: flex; gap: 6px; margin: 8px 0; flex-wrap: wrap;">';
             availableSizes.forEach(s => {
@@ -76,7 +75,7 @@ async function loadProducts() {
     }
 }
 
-// دالة اختيار المقاس (تغير لون الزر عند النقر عليه)
+// دالة اختيار المقاس وتلوين الزر بالأسود
 window.selectedSizes = {};
 function selectSize(button, productId, size) {
     const card = button.closest('.product-card');
@@ -89,7 +88,7 @@ function selectSize(button, productId, size) {
     window.selectedSizes[productId] = size;
 }
 
-// دالة الإضافة إلى السلة مع التحقق من اختيار المقاس
+// دالة الإضافة إلى السلة والتحقق من أن الزبون اختار المقاس
 function addToCart(productId, name, price) {
     const chosenSize = window.selectedSizes[productId];
     if (!chosenSize) {
@@ -116,6 +115,99 @@ function updateCartCount() {
     }
 }
 
+// نافذة السلة الجانبية وإتمام الطلب عبر واتساب
 document.addEventListener('DOMContentLoaded', () => {
     loadProducts();
+
+    if (!document.getElementById('cart-modal')) {
+        const cartModalHTML = `
+            <div id="cart-modal" style="position: fixed; top: 0; right: -400px; width: 350px; height: 100%; background: #fff; box-shadow: -5px 0 15px rgba(0,0,0,0.1); z-index: 1000; transition: right 0.3s ease; display: flex; flex-direction: column; padding: 20px; box-sizing: border-box;">
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 15px;">
+                    <h3>Votre Panier</h3>
+                    <button id="close-cart-btn" style="background: none; border: none; font-size: 24px; cursor: pointer;">&times;</button>
+                </div>
+                <div id="cart-items-container" style="flex: 1; overflow-y: auto; padding: 15px 0;">
+                    <p style="color: #777; text-align: center;">Votre panier est vide.</p>
+                </div>
+                <div style="border-top: 1px solid #eee; padding-top: 15px;">
+                    <p id="cart-total" style="font-weight: bold; margin-bottom: 10px;">Total : 0 DA</p>
+                    <button style="width: 100%; background: #25D366; color: #fff; border: none; padding: 12px; border-radius: 6px; font-weight: bold; cursor: pointer;" onclick="checkoutWhatsApp()">Commander via WhatsApp</button>
+                </div>
+            </div>
+        `;
+        document.body.insertAdjacentHTML('beforeend', cartModalHTML);
+    }
+
+    const cartButton = document.querySelector('.cart-button');
+    const cartModal = document.getElementById('cart-modal');
+    const closeCartBtn = document.getElementById('close-cart-btn');
+
+    if (cartButton && cartModal) {
+        cartButton.addEventListener('click', () => {
+            cartModal.style.right = '0';
+            updateCartUI();
+        });
+    }
+
+    if (closeCartBtn && cartModal) {
+        closeCartBtn.addEventListener('click', () => {
+            cartModal.style.right = '-400px';
+        });
+    }
 });
+
+function updateCartUI() {
+    const cartContainer = document.getElementById('cart-items-container');
+    const cartTotal = document.getElementById('cart-total');
+    const cartCount = document.getElementById('cart-count');
+
+    if (cartCount) cartCount.innerText = cart.length;
+    if (!cartContainer) return;
+
+    if (cart.length === 0) {
+        cartContainer.innerHTML = '<p style="color: #777; text-align: center;">Votre panier est vide.</p>';
+        if (cartTotal) cartTotal.innerText = 'Total : 0 DA';
+        return;
+    }
+
+    let html = '';
+    let total = 0;
+    cart.forEach(item => {
+        total += item.price;
+        html += `
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 1px solid #f9f9f9; padding-bottom: 10px;">
+                <div>
+                    <strong>${item.name}</strong><br>
+                    <small style="color: #666;">Taille: ${item.size} | ${item.price.toLocaleString()} DA</small>
+                </div>
+                <button style="background: #ff4d4d; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-size: 11px;" onclick="removeFromCart(${item.cartId})">Supprimer</button>
+            </div>
+        `;
+    });
+    cartContainer.innerHTML = html;
+    if (cartTotal) cartTotal.innerText = `Total : ${total.toLocaleString()} DA`;
+}
+
+function removeFromCart(cartId) {
+    cart = cart.filter(item => item.cartId !== cartId);
+    updateCartUI();
+    updateCartCount();
+}
+
+function checkoutWhatsApp() {
+    if (cart.length === 0) {
+        alert("Votre panier est vide.");
+        return;
+    }
+    let message = "Bonjour Kouim Luxury, je souhaite commander :\n";
+    let total = 0;
+    cart.forEach((item, index) => {
+        message += `${index + 1}. ${item.name} (Taille: ${item.size}) - ${item.price.toLocaleString()} DA\n`;
+        total += item.price;
+    });
+    message += `\nTotal : ${total.toLocaleString()} DA`;
+    
+    const phone = "213541429664";
+    const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank');
+}
