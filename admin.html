@@ -18,50 +18,77 @@
         th { background: #000; color: #fff; }
         .delete-btn { background: #ff4d4d; color: #fff; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; }
         .delete-btn:hover { background: #cc0000; }
+        #admin-content { display: none; } /* إخفاء اللوحة حتى يتم إدخال كلمة المرور الصحيحة */
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h2>لوحة تحكم المشرف - إضافة منتج جديد</h2>
-        <form id="add-product-form">
-            <div class="form-group">
-                <label>اسم المنتج:</label>
-                <input type="text" id="product-name" required placeholder="مثال: Nike">
-            </div>
-            <div class="form-group">
-                <label>السعر (DA):</label>
-                <input type="number" id="product-price" required placeholder="مثال: 5500">
-            </div>
-            <div class="form-group">
-                <label>المقاسات المتاحة (افصل بينها بفاصلة):</label>
-                <input type="text" id="product-size" required placeholder="مثال: 38, 39, 40, 41">
-            </div>
-            <div class="form-group">
-                <label>صورة المنتج:</label>
-                <input type="file" id="product-image" accept="image/*" required>
-            </div>
-            <button type="submit" id="submit-btn">إضافة المنتج</button>
-        </form>
+        <!-- شاشة التحقق من كلمة المرور -->
+        <div id="login-section" style="text-align: center; padding: 40px 20px;">
+            <h2>تسجيل دخول المشرف</h2>
+            <p style="color: #666; margin-bottom: 20px;">الرجاء إدخال كلمة المرور للوصول إلى لوحة التحكم</p>
+            <input type="password" id="admin-password" placeholder="أدخل كلمة المرور" style="max-width: 300px; margin: 0 auto 15px auto; text-align: center; font-size: 16px;">
+            <br>
+            <button onclick="checkPassword()">دخول</button>
+        </div>
 
-        <h2 style="margin-top: 40px;">قائمة المنتجات الحالية (للتحكم والحذف)</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>الصورة</th>
-                    <th>الاسم</th>
-                    <th>السعر</th>
-                    <th>المقاسات</th>
-                    <th>إجراء</th>
-                </tr>
-            </thead>
-            <tbody id="admin-products-list">
-                <!-- سيتم جلب وعرض جميع المنتجات هنا تلقائياً مع زر الحذف -->
-            </tbody>
-        </table>
+        <!-- محتوى لوحة التحكم (لا يظهر إلا بعد كلمة المرور الصحيحة) -->
+        <div id="admin-content">
+            <h2>لوحة تحكم المشرف - إضافة منتج جديد</h2>
+            <form id="add-product-form">
+                <div class="form-group">
+                    <label>اسم المنتج:</label>
+                    <input type="text" id="product-name" required placeholder="مثال: Nike">
+                </div>
+                <div class="form-group">
+                    <label>السعر (DA):</label>
+                    <input type="number" id="product-price" required placeholder="مثال: 5500">
+                </div>
+                <div class="form-group">
+                    <label>المقاسات المتاحة (افصل بينها بفاصلة):</label>
+                    <input type="text" id="product-size" required placeholder="مثال: 38, 39, 40, 41">
+                </div>
+                <div class="form-group">
+                    <label>صورة المنتج:</label>
+                    <input type="file" id="product-image" accept="image/*" required>
+                </div>
+                <button type="submit" id="submit-btn">إضافة المنتج</button>
+            </form>
+
+            <h2 style="margin-top: 40px;">قائمة المنتجات الحالية (للتحكم والحذف)</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>الصورة</th>
+                        <th>الاسم</th>
+                        <th>السعر</th>
+                        <th>المقاسات</th>
+                        <th>إجراء</th>
+                    </tr>
+                </thead>
+                <tbody id="admin-products-list">
+                    <!-- سيتم جلب وعرض جميع المنتجات هنا تلقائياً مع زر الحذف -->
+                </tbody>
+            </table>
+        </div>
     </div>
 
-    <!-- ربط ملف جافاسكريبت المشرف -->
-    <script src="admin.js"></script>
+    <!-- كود التحقق من كلمة المرور وتشغيل لوحة التحكم -->
+    <script>
+        function checkPassword() {
+            const passInput = document.getElementById('admin-password').value;
+            if (passInput === 'kouim.16') {
+                document.getElementById('login-section').style.display = 'none';
+                document.getElementById('admin-content').style.display = 'block';
+                // تفعيل ملف الجافاسكريبت بعد نجاح كلمة المرور
+                const scriptTag = document.createElement('script');
+                scriptTag.src = 'admin.js';
+                document.body.appendChild(scriptTag);
+            } else {
+                alert('كلمة المرور غير صحيحة! حاول مرة أخرى.');
+            }
+        }
+    </script>
 </body>
 </html>
