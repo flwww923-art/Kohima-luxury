@@ -66,8 +66,8 @@ async function loadProducts() {
             container.innerHTML += productHTML;
         });
 
-    } catch (err) {
-        console.error('Error loading products:', err);
+    } cmd => {
+        console.error('Error loading products:', cmd);
     }
 }
 
@@ -97,7 +97,6 @@ function buyDirect(name, price, productId) {
     message += `▪️ Taille : ${chosenSize}\n`;
     message += `▪️ Prix : ${price.toLocaleString()} DA\n`;
 
-    // تم تحديث الرقم الجديد هنا
     const phone = "213659246214"; 
 
     const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
