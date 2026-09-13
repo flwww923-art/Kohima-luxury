@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kouim Luxury | Boutique en Ligne</title>
     <style>
-        /* تنسيقات أساسية للمتجر */
         * {
             margin: 0;
             padding: 0;
@@ -13,43 +12,45 @@
             font-family: Arial, sans-serif;
         }
         body {
-            /* خلفية فخمة مع تدرج لوني يوضح الصورة بشكل جذاب */
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
-            background-size: cover;
-            color: #333;
+            background-color: #121212;
+            color: #fff;
         }
         header {
-            background: #fff;
-            padding: 15px 30px;
+            background: #1a1a1a;
+            padding: 20px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid #333;
             position: sticky;
             top: 0;
             z-index: 100;
         }
         .logo {
-            font-size: 22px;
+            font-size: 20px;
             font-weight: bold;
             letter-spacing: 2px;
-            color: #000;
+            color: #fff;
+        }
+        .logo span {
+            color: #d4af37;
         }
         nav a {
             margin: 0 15px;
             text-decoration: none;
-            color: #555;
+            color: #aaa;
             font-size: 14px;
             font-weight: 500;
+            transition: color 0.3s;
         }
         nav a:hover {
-            color: #000;
+            color: #fff;
         }
         .cart-button {
-            background: #000;
-            color: #fff;
+            background: #d4af37;
+            color: #000;
             border: none;
-            padding: 8px 15px;
+            padding: 8px 16px;
             border-radius: 6px;
             cursor: pointer;
             font-weight: bold;
@@ -58,72 +59,78 @@
             gap: 8px;
         }
         .cart-button b {
-            background: #fff;
-            color: #000;
+            background: #000;
+            color: #fff;
             padding: 2px 6px;
             border-radius: 10px;
             font-size: 12px;
         }
+        
+        /* قسم البانر الترحيبى العصري */
+        .hero-banner {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1920&q=80') no-repeat center center;
+            background-size: cover;
+            padding: 80px 20px;
+            text-align: center;
+            border-bottom: 2px solid #333;
+            margin-bottom: 40px;
+        }
+        .hero-banner h1 {
+            font-size: 42px;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+        }
+        .hero-banner p {
+            font-size: 18px;
+            color: #ccc;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
         main {
             max-width: 1200px;
-            margin: 30px auto;
+            margin: 0 auto 50px auto;
             padding: 0 20px;
         }
-
-        /* قسم الترحيب و لماذا تختارنا */
-        .hero-section {
-            background: rgba(17, 17, 17, 0.9);
-            color: #fff;
-            padding: 40px 20px;
-            text-align: center;
-            border-radius: 10px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        }
-        .hero-section h2 {
-            font-size: 28px;
-            margin-bottom: 15px;
-            color: #d4af37; /* لون ذهبي راقي */
-        }
-        .hero-section p {
-            font-size: 16px;
-            line-height: 1.6;
-            max-width: 750px;
-            margin: 0 auto;
-            color: #ddd;
+        .section-title {
+            margin-bottom: 25px;
+            font-size: 26px;
+            border-left: 4px solid #d4af37;
+            padding-left: 10px;
         }
 
-        h1.section-title {
-            margin-bottom: 20px;
-            font-size: 24px;
-            color: #fff;
-            text-align: center;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
-        }
         /* شبكة المنتجات */
         #products-container {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 20px;
+            gap: 25px;
         }
 
         /* تذييل الصفحة (Footer) */
         footer {
-            text-align: center;
-            margin-top: 50px;
-            padding: 30px 20px;
-            background: rgba(17, 17, 17, 0.95);
-            color: #fff;
-            border-top: 2px solid #d4af37;
+            background: #1a1a1a;
+            padding: 30px 40px;
+            border-top: 1px solid #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 60px;
         }
-        footer p {
-            margin: 8px 0;
-            font-size: 15px;
-        }
-        .phone-number {
-            color: #d4af37;
-            font-weight: bold;
+        .footer-logo {
             font-size: 18px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            color: #fff;
+        }
+        .footer-logo span {
+            color: #d4af37;
+        }
+        .footer-info {
+            color: #aaa;
+            font-size: 14px;
         }
     </style>
 </head>
@@ -131,7 +138,7 @@
 
     <!-- الهيدر وشريط التنقل -->
     <header>
-        <div class="logo">KOUIM LUXURY</div>
+        <div class="logo">KOUIM <span>LUXURY</span></div>
         <nav>
             <a href="#">Accueil</a>
             <a href="#">Collection</a>
@@ -144,26 +151,26 @@
         </button>
     </header>
 
-    <!-- المحتوى الرئيسي -->
-    <main>
-        <!-- قسم الترحيب و لماذا تختارنا -->
-        <section class="hero-section">
-            <h2>مرحباً بكم في عالم الأناقة والتميز</h2>
-            <p>لماذا تختارنا؟ نحن نقدم لكم أجمل وأفخم المنتجات بجودة عالية وتصميمات عصرية تلبي تطلعاتكم وتناسب أذواقكم الرفيعة لتظهروا دائماً بأفضل حلة.</p>
-        </section>
+    <!-- بانر ترحيبي فاخر -->
+    <section class="hero-banner">
+        <h1>MOVE DIFFERENT.</h1>
+        <p>لماذا تختارنا؟ نحن نقدم لكم أجمل وأفخم المنتجات بجودة عالية وتصميمات عصرية تلبي تطلعاتكم وتناسب أذواقكم الرفيعة.</p>
+    </section>
 
-        <h1 class="section-title">Notre Collection</h1>
-        
+    <!-- المحتوى الرئيسي وعرض المنتجات -->
+    <main>
+        <h2 class="section-title">THE DROP.</h2>
         <div id="products-container">
             <!-- سيتم جلب المنتجات وأزرار المقاسات ديناميكياً هنا عبر script.js -->
         </div>
     </main>
 
-    <!-- تذييل الصفحة (Footer) يحتوي على رقم الهاتف -->
+    <!-- تذييل الصفحة (Footer) مع رقم الهاتف -->
     <footer>
-        <p>شكراً لزيارتكم متجر Kouim Luxury</p>
-        <p>للاستفسار أو طلب المنتجات عبر الهاتف، تواصل معنا:</p>
-        <p class="phone-number">📞 0655355655</p>
+        <div class="footer-logo">KOUIM <span>LUXURY</span></div>
+        <div class="footer-info">
+            Ain Naadja, Alger - <span style="color: #d4af37; font-weight: bold;">0559399640</span>
+        </div>
     </footer>
 
     <!-- استدعاء ملف الجافا سكربت الخارجي -->
