@@ -1,24 +1,9 @@
-let _supabase;
+const SUPABASE_URL = 'https://ogsvoxbgxjezirjwiemb.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9nc3ZveGJneGplemlyandpZW1iIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkyMjkyNjMsImV4cCI6MjEwNDgwNTI2M30.vxMmDln8Kp9cLE4_tsfAhRaOMEQIU97e5X4z--IxoS8';
 
-async function initSupabase() {
-    if (!window.supabase) {
-        await new Promise((resolve, reject) => {
-            const s = document.createElement('script');
-            s.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
-            s.onload = resolve;
-            s.onerror = reject;
-            document.head.appendChild(s);
-        });
-    }
+const _supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-    const SUPABASE_URL = 'https://ogsvoxbgxjezirjwiemb.supabase.co';
-    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9nc3ZveGJneGplemlyandpZW1iIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkyMjkyNjMsImV4cCI6MjEwNDgwNTI2M30.vxMmDln8Kp9cLE4_tsfAhRaOMEQIU97e5X4z--IxoS8';
-    
-    _supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-    fetchAdminProducts();
-}
-
-// جلب وعرض المنتجات في جدول المشرف مع زر الحذف
+// جلب وعرض المنتجات في جدول المشرف فوراً
 async function fetchAdminProducts() {
     const tbody = document.getElementById('admin-products-list');
     if (!tbody) return;
@@ -38,21 +23,23 @@ async function fetchAdminProducts() {
         }
 
         products.forEach(product => {
+            const sizesText = product.size || product.sizes || '-';
             tbody.innerHTML += 
                 '<tr>' +
                     '<td><img src="' + (product.image_url || '') + '" width="50" height="50" style="object-fit:cover; border-radius:4px;"></td>' +
                     '<td>' + product.name + '</td>' +
-                    '<td>' + product.price + ' DA</td>' +
-                    '<td>' + (product.size || '-') + '</td>' +
+                    '<td>' + (product.price ? product.price.toLocaleString() + ' DA' : '') + '</td>' +
+                    '<td>' + sizesText + '</td>' +
                     '<td><button class="delete-btn" onclick="deleteProduct(\'' + product.id + '\')">حذف</button></td>' +
                 '</tr>';
         });
     } catch (err) {
         console.error('Error fetching admin products:', err);
+        tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; color:red;">خطأ في جلب المنتجات.</td></tr>';
     }
 }
 
-// دالة حذف المنتج من قاعدة البيانات
+// دالة حذف المنتج
 async function deleteProduct(id) {
     if (!confirm('هل أنت متأكد من رغبتك في حذف هذا المنتج؟')) return;
 
@@ -72,9 +59,9 @@ async function deleteProduct(id) {
     }
 }
 
-// إضافة منتج جديد ورفع الصورة للتخزين (Storage)
+// إضافة منتج جديد
 document.addEventListener('DOMContentLoaded', () => {
-    initSupabase();
+    fetchAdminProducts();
 
     const form = document.getElementById('add-product-form');
     if (form) {
@@ -125,3 +112,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+// استدعاء الجلب مباشرة عند تحميل الملف
+fetchAdminProducts();
