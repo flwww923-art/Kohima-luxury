@@ -44,7 +44,7 @@ body {
 img {
     width: 100%;
     display: block;
-    object-fit: cover;
+    object-fit: contain; /* تم التعديل هنا لكي تظهر الصور كاملة */
 }
 
 a {
@@ -332,6 +332,7 @@ button {
 
 .hero-image img {
     height: 100%;
+    object-fit: cover; /* تم إبقاء هذه cover لتناسب صورة الواجهة الكبيرة كخلفية جمالية */
     transition: transform 1s ease;
 }
 
@@ -445,10 +446,16 @@ button {
     height: 390px;
     overflow: hidden;
     position: relative;
+    background: #f0ebe1; /* لون خفيف يملأ الفراغات إن وجدت بجانب الصورة */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .product-image img {
     height: 100%;
+    width: 100%;
+    object-fit: contain; /* تعديل حاسم لضمان ظهور الأحذية كاملة دون قص */
     transition: transform 0.7s ease;
 }
 
@@ -567,6 +574,7 @@ button {
 
 .about-image img {
     height: 100%;
+    object-fit: cover;
 }
 
 .about-content {
