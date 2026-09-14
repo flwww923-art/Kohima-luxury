@@ -4,279 +4,106 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kouim Luxury | Boutique en Ligne</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
-        body {
-            background-color: #121212;
-            color: #fff;
-        }
-        header {
-            background: #1a1a1a;
-            padding: 20px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #333;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        .logo {
-            font-size: 20px;
-            font-weight: bold;
-            letter-spacing: 2px;
-            color: #fff;
-        }
-        .logo span {
-            color: #d4af37;
-        }
-        nav a {
-            margin: 0 15px;
-            text-decoration: none;
-            color: #aaa;
-            font-size: 14px;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-        nav a:hover {
-            color: #fff;
-        }
-        .cart-button {
-            background: #d4af37;
-            color: #000;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .cart-button b {
-            background: #000;
-            color: #fff;
-            padding: 2px 6px;
-            border-radius: 10px;
-            font-size: 12px;
-        }
-        
-        /* قسم البانر الرئيسي - Move Different */
-        .hero-banner {
-            background: #1a1a1a;
-            padding: 80px 40px;
-            border-bottom: 1px solid #333;
-            margin-bottom: 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 40px;
-        }
-        .hero-text {
-            flex: 1;
-            min-width: 300px;
-        }
-        .hero-subtitle {
-            font-size: 12px;
-            letter-spacing: 2px;
-            color: #d4af37;
-            text-transform: uppercase;
-            margin-bottom: 15px;
-            display: block;
-        }
-        .hero-banner h1 {
-            font-size: 56px;
-            margin-bottom: 20px;
-            letter-spacing: 2px;
-            font-weight: 900;
-            color: #fff;
-            line-height: 1.1;
-        }
-        .hero-banner p {
-            font-size: 16px;
-            color: #aaa;
-            max-width: 500px;
-            line-height: 1.6;
-            margin-bottom: 25px;
-        }
-        .hero-btn {
-            display: inline-block;
-            background: #d4af37;
-            color: #000;
-            padding: 12px 28px;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 4px;
-            letter-spacing: 1px;
-        }
-        .hero-image {
-            flex: 1;
-            min-width: 300px;
-            text-align: center;
-        }
-        .hero-image img {
-            max-width: 100%;
-            border-radius: 8px;
-            border: 1px solid #333;
-        }
-
-        main {
-            max-width: 1200px;
-            margin: 0 auto 50px auto;
-            padding: 0 20px;
-        }
-        .section-title {
-            margin-bottom: 25px;
-            font-size: 24px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            color: #fff;
-        }
-
-        /* شبكة المنتجات */
-        #products-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 25px;
-            margin-bottom: 60px;
-        }
-
-        /* قسم التعريف الإضافي - Not a mall */
-        .info-section {
-            background: #1a1a1a;
-            border: 1px solid #333;
-            border-radius: 8px;
-            padding: 40px;
-            margin-bottom: 50px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            align-items: center;
-        }
-        .info-box h2 {
-            font-size: 36px;
-            font-weight: 900;
-            letter-spacing: 1px;
-            margin-bottom: 20px;
-            color: #fff;
-            line-height: 1.2;
-        }
-        .info-box p {
-            color: #aaa;
-            font-size: 15px;
-            line-height: 1.6;
-        }
-        .info-box-right {
-            border-left: 1px solid #333;
-            padding-left: 40px;
-        }
-        .info-box-right h3 {
-            color: #d4af37;
-            font-size: 20px;
-            margin-bottom: 10px;
-        }
-
-        /* تذييل الصفحة (Footer) */
-        footer {
-            background: #1a1a1a;
-            padding: 25px 40px;
-            border-top: 1px solid #333;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-        .footer-logo {
-            font-size: 18px;
-            font-weight: bold;
-            letter-spacing: 1px;
-            color: #fff;
-        }
-        .footer-logo span {
-            color: #d4af37;
-        }
-        .footer-info {
-            color: #aaa;
-            font-size: 14px;
-        }
-
-        @media (max-width: 768px) {
-            .info-section {
-                grid-template-columns: 1fr;
-                padding: 20px;
-            }
-            .info-box-right {
-                border-left: none;
-                border-top: 1px solid #333;
-                padding-left: 0;
-                padding-top: 20px;
-            }
-            .hero-banner h1 {
-                font-size: 38px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <header>
-        <div class="logo">KOUIM <span>LUXURY</span></div>
-        <nav>
-            <a href="#">Shop the drop</a>
-            <a href="#">Our point of view</a>
-            <a href="#">How to order</a>
+    <header class="header">
+        <div class="logo">
+            <span>KOUIM LUXURY</span>
+            <small>SNEAKERS DROP</small>
+        </div>
+        <nav class="navbar">
+            <a href="#shop">Shop the drop</a>
+            <a href="#about">Our point of view</a>
+            <a href="#contact">Contact</a>
         </nav>
-        <button class="cart-button">
+        <button class="cart-button" onclick="toggleCart()">
             🛒 <span>Panier</span>
             <b id="cart-count">0</b>
         </button>
     </header>
 
-    <!-- بانر واجهة Move Different مع صورة جوردن فخمة -->
-    <section class="hero-banner">
-        <div class="hero-text">
-            <span class="hero-subtitle">⚡ SNEAKER CULTURE</span>
-            <h1>MOVE DIFFERENT.</h1>
-            <p>Curated pairs. Real comfort. Delivered across Algeria. تصاميم عصرية تناسب أذواقكم الرفيعة بجودة استثنائية.</p>
-            <a href="#products-container" class="hero-btn">Explore the drop</a>
+    <section class="hero">
+        <div class="hero-content">
+            <span class="welcome">⚡ SNEAKER CULTURE</span>
+            <h1>MOVE <span>DIFFERENT.</span></h1>
+            <p class="hero-text">Curated pairs. Real comfort. Delivered across Algeria. تصاميم عصرية تناسب أذواقكم الرفيعة بجودة استثنائية.</p>
+            <div class="hero-buttons">
+                <a href="#shop" class="primary-button">Explore the drop</a>
+                <a href="#about" class="secondary-button">Our view</a>
+            </div>
         </div>
         <div class="hero-image">
-            <img src="https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&w=600&q=80" alt="Jordan Sneaker">
+            </div>
+    </section>
+
+    <section class="products-section" id="shop">
+        <div class="section-header">
+            <div>
+                <span class="section-label">THE COLLECTION</span>
+                <h2>The Drop<span>.</span></h2>
+            </div>
+            <p>أحدث الإصدارات وأرقى التصاميم المتوفرة حصرياً لدينا.</p>
+        </div>
+        <div class="products-grid" id="products-container">
+            </div>
+    </section>
+
+    <section class="advantages">
+        <div class="advantage">
+            <span>✦</span>
+            <h3>100% Original</h3>
+            <p>منتجات أصلية ومضمونة الجودة.</p>
+        </div>
+        <div class="advantage">
+            <span>✦</span>
+            <h3>Fast Delivery</h3>
+            <p>توصيل سريع لجميع ولايات الوطن.</p>
+        </div>
+        <div class="advantage">
+            <span>✦</span>
+            <h3>Best Quality</h3>
+            <p>أرقى الماركات العالمية بتفاصيل دقيقة.</p>
+        </div>
+        <div class="advantage">
+            <span>✦</span>
+            <h3>Local Pickup</h3>
+            <p>إمكانية الاستلام الفوري (عين النعجة).</p>
         </div>
     </section>
 
-    <main>
-        <h2 class="section-title">The Drop.</h2>
-        
-        <!-- شبكة المنتجات (تُعرض ديناميكياً عبر الـ JavaScript لديك) -->
-        <div id="products-container"></div>
-
-        <!-- قسم تعريفي إضافي مثل الموقع المطلوب -->
-        <div class="info-section">
-            <div class="info-box">
-                <span class="hero-subtitle">001 / WHY DO WE DO THIS</span>
-                <h2>NOT A MALL,<br>A POINT OF VIEW.</h2>
-                <p>We look for the pairs that earn a second glance. The good everyday comers, the true conversation starters. We curates shoes that bring a look together, not just fill shelves.</p>
-            </div>
-            <div class="info-box info-box-right">
-                <span class="hero-subtitle">002 / LOCATION</span>
-                <h3>Ain Naadja, Alger</h3>
-                <p>Real pairs, real people, right around the corner. Fast, local pickups available on request.</p>
-            </div>
+    <section class="about-section" id="about">
+        <div class="about-content">
+            <span class="section-label">001 / OUR PHILOSOPHY</span>
+            <h2>NOT A MALL,<br><span>A POINT OF VIEW.</span></h2>
+            <p>We look for the pairs that earn a second glance. The good everyday comers, the true conversation starters. We curates shoes that bring a look together, not just fill shelves.</p>
+            <p>متجر متخصص في جلب أرقى وأجمل الأحذية التي تميز إطلالتك وتمنحك راحة لا تقارن.</p>
         </div>
-    </main>
+        <div class="about-image">
+            <img src="https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&w=800&q=80" alt="Aesthetic Sneaker">
+        </div>
+    </section>
 
-    <footer>
-        <div class="footer-logo">KOUIM <span>LUXURY</span></div>
-        <div class="footer-info">Ain Naadja, Alger - 0559399640</div>
+    <section class="contact-section" id="contact">
+        <span class="section-label">GET IN TOUCH</span>
+        <h2>Contact Us<span>.</span></h2>
+        <p>للطلب والاستفسار، تواصل معنا عبر الهاتف أو الواتساب.</p>
+        <div class="contact-info">
+            <a href="tel:0559399640">0559 39 96 40</a>
+            <p>Ain Naadja, Alger</p>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2026 KOUIM LUXURY. All rights reserved.</p>
+        <div>
+            <a href="#shop">Shop</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </div>
     </footer>
 
+    <script src="script.js"></script>
 </body>
 </html>
