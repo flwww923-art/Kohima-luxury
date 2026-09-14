@@ -66,27 +66,64 @@
             font-size: 12px;
         }
         
-        /* البانر الترحيبي */
+        /* قسم البانر الرئيسي - Move Different */
         .hero-banner {
             background: #1a1a1a;
-            padding: 60px 30px;
+            padding: 80px 40px;
             border-bottom: 1px solid #333;
             margin-bottom: 40px;
-            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+        .hero-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        .hero-subtitle {
+            font-size: 12px;
+            letter-spacing: 2px;
+            color: #d4af37;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            display: block;
         }
         .hero-banner h1 {
-            font-size: 48px;
-            margin-bottom: 15px;
+            font-size: 56px;
+            margin-bottom: 20px;
             letter-spacing: 2px;
             font-weight: 900;
             color: #fff;
+            line-height: 1.1;
         }
         .hero-banner p {
             font-size: 16px;
             color: #aaa;
-            max-width: 700px;
-            margin: 0 auto;
+            max-width: 500px;
             line-height: 1.6;
+            margin-bottom: 25px;
+        }
+        .hero-btn {
+            display: inline-block;
+            background: #d4af37;
+            color: #000;
+            padding: 12px 28px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 4px;
+            letter-spacing: 1px;
+        }
+        .hero-image {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+        .hero-image img {
+            max-width: 100%;
+            border-radius: 8px;
+            border: 1px solid #333;
         }
 
         main {
@@ -99,6 +136,7 @@
             font-size: 24px;
             letter-spacing: 1px;
             text-transform: uppercase;
+            color: #fff;
         }
 
         /* شبكة المنتجات */
@@ -106,6 +144,42 @@
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
             gap: 25px;
+            margin-bottom: 60px;
+        }
+
+        /* قسم التعريف الإضافي - Not a mall */
+        .info-section {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 40px;
+            margin-bottom: 50px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+        .info-box h2 {
+            font-size: 36px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            color: #fff;
+            line-height: 1.2;
+        }
+        .info-box p {
+            color: #aaa;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+        .info-box-right {
+            border-left: 1px solid #333;
+            padding-left: 40px;
+        }
+        .info-box-right h3 {
+            color: #d4af37;
+            font-size: 20px;
+            margin-bottom: 10px;
         }
 
         /* تذييل الصفحة (Footer) */
@@ -118,7 +192,6 @@
             align-items: center;
             flex-wrap: wrap;
             gap: 15px;
-            margin-top: 60px;
         }
         .footer-logo {
             font-size: 18px;
@@ -132,6 +205,22 @@
         .footer-info {
             color: #aaa;
             font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .info-section {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+            .info-box-right {
+                border-left: none;
+                border-top: 1px solid #333;
+                padding-left: 0;
+                padding-top: 20px;
+            }
+            .hero-banner h1 {
+                font-size: 38px;
+            }
         }
     </style>
 </head>
@@ -150,24 +239,44 @@
         </button>
     </header>
 
+    <!-- بانر واجهة Move Different مع صورة جوردن فخمة -->
     <section class="hero-banner">
-        <h1>MOVE DIFFERENT.</h1>
-        <p>لماذا تختارنا؟ نحن نقدم لكم أجمل وأفخم المنتجات بجودة عالية وتصميمات عصرية تلبي تطلعاتكم وتناسب أذواقكم الرفيعة.</p>
+        <div class="hero-text">
+            <span class="hero-subtitle">⚡ SNEAKER CULTURE</span>
+            <h1>MOVE DIFFERENT.</h1>
+            <p>Curated pairs. Real comfort. Delivered across Algeria. تصاميم عصرية تناسب أذواقكم الرفيعة بجودة استثنائية.</p>
+            <a href="#products-container" class="hero-btn">Explore the drop</a>
+        </div>
+        <div class="hero-image">
+            <img src="https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&w=600&q=80" alt="Jordan Sneaker">
+        </div>
     </section>
 
     <main>
-        <h2 class="section-title">THE DROP.</h2>
-        <div id="products-container">
+        <h2 class="section-title">The Drop.</h2>
+        
+        <!-- شبكة المنتجات (تُعرض ديناميكياً عبر الـ JavaScript لديك) -->
+        <div id="products-container"></div>
+
+        <!-- قسم تعريفي إضافي مثل الموقع المطلوب -->
+        <div class="info-section">
+            <div class="info-box">
+                <span class="hero-subtitle">001 / WHY DO WE DO THIS</span>
+                <h2>NOT A MALL,<br>A POINT OF VIEW.</h2>
+                <p>We look for the pairs that earn a second glance. The good everyday comers, the true conversation starters. We curates shoes that bring a look together, not just fill shelves.</p>
             </div>
+            <div class="info-box info-box-right">
+                <span class="hero-subtitle">002 / LOCATION</span>
+                <h3>Ain Naadja, Alger</h3>
+                <p>Real pairs, real people, right around the corner. Fast, local pickups available on request.</p>
+            </div>
+        </div>
     </main>
 
     <footer>
         <div class="footer-logo">KOUIM <span>LUXURY</span></div>
-        <div class="footer-info">
-            Ain Naadja, Alger - <span style="color: #fff; font-weight: bold;">0541429664</span>
-        </div>
+        <div class="footer-info">Ain Naadja, Alger - 0559399640</div>
     </footer>
 
-    <script src="script.js"></script>
 </body>
 </html>
