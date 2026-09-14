@@ -48,8 +48,8 @@ async function loadProducts() {
             card.style.cssText = 'background: #fff; border-radius: 8px; padding: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-bottom: 20px;';
             
             card.innerHTML = 
-                '<div style="height: 200px; overflow: hidden; border-radius: 6px;">' +
-                    '<img src="' + (product.image_url || 'images/product-1.jpg') + '" alt="' + product.name + '" style="width: 100%; height: 100%; object-fit: cover;">' +
+                '<div style="height: 200px; overflow: hidden; border-radius: 6px; background: #f8f5ef; display: flex; align-items: center; justify-content: center;">' +
+                    '<img src="' + (product.image_url || 'images/product-1.jpg') + '" alt="' + product.name + '" style="width: 100%; height: 100%; object-fit: contain;">' +
                 '</div>' +
                 '<div style="padding-top: 10px;">' +
                     '<p style="font-size: 11px; color: #888;">KOUIM LUXURY</p>' +
